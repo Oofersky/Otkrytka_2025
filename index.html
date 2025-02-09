@@ -761,9 +761,10 @@ figcaption:hover {
     <div class="modal" id="completedModal" style="display:none;">
         <div class="modal-content">
             <h2>Ты исчерпала все предсказания! 🎉</h2>
-            <p>Не переживай, ты можешь получить новые предсказания на следующий день рождения!) 🎂💫</p>
-            <button class="button" id="resetBtnInModal">Сбросить данные и начать заново</button>
+            <p>Не переживай, на следущий день рождения будет ещё круче!) 🎂💫</p>
             <button class="button" id="closeCompletedModal">Закрыть</button>
+             <!--             <button class="button" id="resetBtnInModal">Сбросить данные и начать заново</button>
+         -->
         </div>
     </div>
 
@@ -826,7 +827,7 @@ figcaption:hover {
         const predictionText = document.getElementById('predictionText');
         const thanksBtn = document.getElementById('thanksBtn');
         const completedModal = document.getElementById('completedModal');
-        const resetBtnInModal = document.getElementById('resetBtnInModal');
+      //  const resetBtnInModal = document.getElementById('resetBtnInModal');
         const closeCompletedModal = document.getElementById('closeCompletedModal');
         const timerBarInner = document.getElementById('timerBarInner');
         const closeTimerBtn = document.getElementById('closeTimerBtn');
@@ -971,15 +972,15 @@ function startTimer() {
             hideModal(completedModal);
         });
     
-        // Сброс данных
-        resetBtnInModal.addEventListener('click', () => {
-            localStorage.clear();
-            remainingPredictions = 3;
-            predictionHistory = [];
-            usedPredictions = [];
-            updateUI();
-            saveStorage();
-        });
+        //* Сброс данных
+        //resetBtnInModal.addEventListener('click', () => {
+          //  localStorage.clear();
+          //  remainingPredictions = 3;
+//predictionHistory = [];
+         //  usedPredictions = [];
+           // updateUI();
+          //  saveStorage();
+       // }); 
     
         closeTimerBtn.addEventListener('click', () => {
             hideModal(timerModal);
