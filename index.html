@@ -3,12 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Именная открытка с предсказаниями</title>
+    <title>Только для тебя!</title>
     <style>
-       * {
+      /* Общие стили */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #ff7eb3;
+    --secondary-color: #ff7582;
+    --accent-color: #ffab40;
+    --background-gradient: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+    --text-color: #333;
+    --white: #fff;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    --transition: all 0.3s ease;
 }
 
 body {
@@ -16,11 +28,9 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: linear-gradient(45deg, #ff7eb3, #ff7582, #ffab40);
-    height: 100%;
+    background: var(--background-gradient);
     min-height: 100vh;
     overflow-y: auto;
-    position: relative;
     animation: gradientAnimation 10s ease infinite;
 }
 
@@ -29,13 +39,15 @@ body {
     50% { background-position: 100% 50%; }
 }
 
+/* Заголовки и текст */
 h1, h2, h3, p {
     text-align: center;
+    color: var(--text-color);
 }
 
 .site-header {
     width: 100%;
-    color: white;
+    color: var(--white);
     padding: 20px 0;
     text-align: center;
 }
@@ -47,25 +59,26 @@ h1, h2, h3, p {
 }
 
 @keyframes shine {
-    from { color: #fff; }
+    from { color: var(--white); }
     to { color: #ffeb3b; }
 }
 
+/* Карточки */
 .card {
     width: 100%;
     max-width: 600px;
     margin: 20px auto;
     padding: 20px;
-    background-color: #fff;
+    background-color: var(--white);
     border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow);
     text-align: center;
     animation: fadeIn 0.8s ease-out;
 }
 
 .card h1 {
     font-size: 2rem;
-    color: #ff7eb3;
+    color: var(--primary-color);
 }
 
 .card p {
@@ -74,25 +87,28 @@ h1, h2, h3, p {
     color: #555;
 }
 
-.card .button {
+/* Кнопки */
+.button {
     margin-top: 30px;
     padding: 15px 30px;
-    background: #ff7eb3;
-    color: white;
+    background: var(--primary-color);
+    color: var(--white);
     border-radius: 10px;
     font-size: 1.2rem;
     font-weight: bold;
     text-decoration: none;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s, background 0.3s;
+    transition: var(--transition);
     display: inline-block;
+    cursor: pointer;
 }
 
-.card .button:hover {
-    background: #ff7582;
+.button:hover {
+    background: var(--secondary-color);
     transform: scale(1.1);
 }
 
+/* Галерея */
 .gallery {
     width: 100%;
     padding: 20px;
@@ -104,7 +120,7 @@ h1, h2, h3, p {
 .gallery h2 {
     font-size: 2rem;
     margin-bottom: 20px;
-    color: #fff;
+    color: var(--white);
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
@@ -118,7 +134,7 @@ h1, h2, h3, p {
 .gallery .images img {
     border-radius: 10px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: var(--transition);
 }
 
 .gallery .images img:hover {
@@ -138,16 +154,17 @@ h1, h2, h3, p {
     object-fit: cover;
 }
 
+/* Подвал */
 footer {
     width: 100%;
-    background: #fff;
-    color: #ff7582;
+    background: var(--white);
+    color: var(--secondary-color);
     text-align: center;
     padding: 15px 0;
-    position: relative;
-    border-top: 2px solid #ff7eb3;
+    border-top: 2px solid var(--primary-color);
 }
 
+/* Модальные окна */
 .modal {
     position: fixed;
     top: 0;
@@ -157,40 +174,47 @@ footer {
     display: none;
     justify-content: center;
     align-items: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
     opacity: 0;
-    background-color: rgba(0, 0, 0, 0.7); /* Темный полупрозрачный фон */
     transition: opacity 0.5s ease;
 }
+
 .modal.show {
-    display: block;
+    display: flex;
     opacity: 1;
 }
 
 .modal-content {
-    background: #fff;
+    background: var(--white);
     border-radius: 10px;
     padding: 30px;
     text-align: center;
-    width: 400px;
-    max-height: 400px;
-    overflow: hidden;
+    width: 90%;
+    max-width: 400px;
     animation: modalSlideIn 0.6s ease-out forwards;
+}
+
+@keyframes modalSlideIn {
+    from { opacity: 0; transform: translateY(-50px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .modal .button {
     margin-top: 20px;
     padding: 12px 25px;
-    background: #ff7eb3;
-    color: #fff;
+    background: var(--primary-color);
+    color: var(--white);
     border-radius: 8px;
     font-size: 1.1rem;
-    transition: background 0.3s;
+    transition: var(--transition);
 }
 
 .modal .button:hover {
-    background: #ff7582;
+    background: var(--secondary-color);
 }
 
+/* Таймер */
 .timer-bar {
     width: 100%;
     height: 10px;
@@ -202,13 +226,15 @@ footer {
 .timer-bar-inner {
     width: 0;
     height: 100%;
-    background: #f17f7f;
+    background: var(--secondary-color);
     border-radius: 5px;
+    transition: width 1s linear;
 }
 
+/* История предсказаний */
 .history-title {
     font-size: 1.2rem;
-    color: #333;
+    color: var(--text-color);
     margin-top: 10px;
     font-weight: bold;
 }
@@ -227,263 +253,12 @@ footer {
     font-weight: 600;
 }
 
-/* Медиазапросы для мобильных устройств */
-
-@media (max-width: 1024px) {
-    .site-header h1 {
-        font-size: 1.8rem;
-    }
-
-    .card {
-        padding: 15px;
-    }
-
-    .card h1 {
-        font-size: 1.5rem;
-    }
-
-    .card p {
-        font-size: 1rem;
-    }
-
-    .gallery h2 {
-        font-size: 1.8rem;
-    }
-
-    .gallery .images {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .modal-content {
-        width: 80%;
-    }
-
-    .secret-message {
-        width: 90%;
-    }
-
-    .secret-message input, .secret-message textarea {
-        width: 100%;
-        font-size: 0.9rem;
-    }
-
-    .secret-message button {
-        font-size: 1rem;
-        padding: 10px 25px;
-    }
-
-    .history {
-        font-size: 1rem;
-    }
-
-    footer {
-        font-size: 1rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .site-header {
-        padding: 10px 0;
-    }
-
-    .site-header h1 {
-        font-size: 1.6rem;
-    }
-
-    .card {
-        padding: 12px;
-    }
-
-    .card h1 {
-        font-size: 1.4rem;
-    }
-
-    .card p {
-        font-size: 0.9rem;
-    }
-
-    .gallery h2 {
-        font-size: 1.5rem;
-    }
-
-    .gallery .images {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .modal-content {
-        width: 90%;
-    }
-
-    .secret-message {
-        margin: 20px auto;
-    }
-
-    .secret-message input, .secret-message textarea {
-        font-size: 0.9rem;
-    }
-
-    .secret-message button {
-        padding: 10px 20px;
-        font-size: 1rem;
-    }
-
-    footer {
-        font-size: 1rem;
-    }
-}
-
-@media (max-width: 480px) {
-    body {
-        font-size: 0.9rem;
-    }
-
-    .site-header h1 {
-        font-size: 1.4rem;
-    }
-
-    .card {
-        padding: 10px;
-    }
-
-    .card h1 {
-        font-size: 1.3rem;
-    }
-
-    .card p {
-        font-size: 0.8rem;
-    }
-
-    .gallery h2 {
-        font-size: 1.3rem;
-    }
-
-    .gallery .images img {
-        max-width: 90%;
-        height: auto;
-    }
-
-    .modal-content {
-        width: 85%;
-    }
-
-    .secret-message {
-        width: 85%;
-    }
-
-    .secret-message input, .secret-message textarea {
-        font-size: 0.8rem;
-    }
-
-    .secret-message button {
-        padding: 8px 20px;
-        font-size: 0.9rem;
-    }
-}
-
-figure {
-    margin: 0;
-    padding: 0;
-    text-align: center;
-}
-
-figcaption {
-    margin-top: 10px;
-    font-size: 1rem;
-    color: #fff;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
-    font-weight: 600;
-    transition: color 0.3s ease;
-}
-
-figcaption:hover {
-    color: #ffab40;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeOut {
-    from {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    to {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-}
-
-@keyframes modalSlideIn {
-    from {
-        opacity: 0;
-        transform: translateY(-50%) scale(0.7);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-@keyframes modalSlideOut {
-    from {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-    to {
-        opacity: 0;
-        transform: translateY(50%) scale(0.7);
-    }
-}
-
-@keyframes backgroundFadeIn {
-    from {
-        background-color: rgba(0, 0, 0, 0);
-    }
-    to {
-        background-color: rgba(0, 0, 0, 0.7);
-    }
-}
-
-@keyframes backgroundFadeOut {
-    from {
-        background-color: rgba(0, 0, 0, 0.7);
-    }
-    to {
-        background-color: rgba(0, 0, 0, 0);
-    }
-}
-
-.modal.fadeIn {
-    animation: modalSlideIn 0.6s ease-out forwards;
-}
-
-.modal.fadeOut {
-    animation: modalSlideOut 0.6s ease-in forwards;
-}
-
-.modal.fadeInBackground {
-    animation: backgroundFadeIn 0.5s ease-out forwards;
-}
-
-.modal.fadeOutBackground {
-    animation: backgroundFadeOut 0.5s ease-in forwards;
-}
-
+/* Секретное сообщение */
 .secret-message {
     width: 100%;
     max-width: 600px;
     margin: 40px auto;
-    background: #fff;
+    background: var(--white);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
@@ -491,7 +266,8 @@ figcaption:hover {
     animation: slideUp 1.5s ease-out;
 }
 
-.secret-message input, .secret-message textarea {
+.secret-message input,
+.secret-message textarea {
     width: 90%;
     padding: 10px;
     margin: 10px 0;
@@ -503,45 +279,319 @@ figcaption:hover {
 .secret-message button {
     margin-top: 20px;
     padding: 12px 30px;
-    background: #ff7eb3;
-    color: white;
+    background: var(--primary-color);
+    color: var(--white);
     border-radius: 8px;
     font-size: 1.2rem;
-    transition: background 0.3s;
+    transition: var(--transition);
 }
 
 .secret-message button:hover {
-    background: #ff7582;
+    background: var(--secondary-color);
 }
 
+/* Анимации */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
 @keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
+/* Медиазапросы */
+@media (max-width: 1024px) {
+    .site-header h1 { font-size: 1.8rem; }
+    .card { padding: 15px; }
+    .card h1 { font-size: 1.5rem; }
+    .card p { font-size: 1rem; }
+    .gallery h2 { font-size: 1.8rem; }
+    .gallery .images { flex-direction: column; }
+    .modal-content { width: 80%; }
+    .secret-message { width: 90%; }
+    .secret-message input,
+    .secret-message textarea { font-size: 0.9rem; }
+    .secret-message button { font-size: 1rem; padding: 10px 25px; }
+    .history { font-size: 1rem; }
+    footer { font-size: 1rem; }
+}
+
+@media (max-width: 768px) {
+    .site-header h1 { font-size: 1.6rem; }
+    .card { padding: 12px; }
+    .card h1 { font-size: 1.4rem; }
+    .card p { font-size: 0.9rem; }
+    .gallery h2 { font-size: 1.5rem; }
+    .modal-content { width: 90%; }
+    .secret-message button { padding: 10px 20px; }
+}
+
+@media (max-width: 480px) {
+    body { font-size: 0.9rem; }
+    .site-header h1 { font-size: 1.4rem; }
+    .card { padding: 10px; }
+    .card h1 { font-size: 1.3rem; }
+    .card p { font-size: 0.8rem; }
+    .gallery h2 { font-size: 1.3rem; }
+    .gallery .images img { max-width: 90%; }
+    .modal-content { width: 85%; }
+    .secret-message { width: 85%; }
+    .secret-message input,
+    .secret-message textarea { font-size: 0.8rem; }
+    .secret-message button { padding: 8px 20px; font-size: 0.9rem; }
+}
+/* Анимация для затемнения фона */
+@keyframes backgroundFadeIn {
+    from { background-color: rgba(0, 0, 0, 0); }
+    to { background-color: rgba(0, 0, 0, 0.7); }
+}
+
+@keyframes backgroundFadeOut {
+    from { background-color: rgba(0, 0, 0, 0.7); }
+    to { background-color: rgba(0, 0, 0, 0); }
+}
+
+.modal.fadeInBackground {
+    animation: backgroundFadeIn 0.5s ease-out forwards;
+}
+
+.modal.fadeOutBackground {
+    animation: backgroundFadeOut 0.5s ease-in forwards;
+}
+
+/* Анимация для модальных окон */
+@keyframes modalSlideOut {
+    from { opacity: 1; transform: translateY(0) scale(1); }
+    to { opacity: 0; transform: translateY(50%) scale(0.7); }
+}
+
+.modal.fadeOut {
+    animation: modalSlideOut 0.6s ease-in forwards;
+}
+
+/* Подписи к изображениям */
+figcaption {
+    margin-top: 10px;
+    font-size: 1rem;
+    color: var(--white);
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+figcaption:hover {
+    color: var(--accent-color);
+}
+
+/* Затемнение фона */
 #overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7); /* Прозрачное черное затемнение */
-    z-index: 998; /* Позиционирование ниже модальных окон */
-    display: none; /* Изначально скрыто */
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 998;
+    display: none;
     opacity: 0;
-    transition: opacity 0.3s ease; /* Плавный переход для появления/исчезновения */
+    transition: opacity 0.3s ease;
 }
 
 #overlay.show {
     display: block;
     opacity: 1;
+}
+
+/* Анимация для секретного сообщения */
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.secret-message {
+    animation: slideUp 1.5s ease-out;
+}
+
+/* Анимация для кнопок */
+.button:active {
+    transform: scale(0.95);
+}
+
+/* Дополнительные стили для модальных окон */
+.modal.fadeIn {
+    animation: modalSlideIn 0.6s ease-out forwards;
+}
+
+.modal.fadeOut {
+    animation: modalSlideOut 0.6s ease-in forwards;
+}
+
+/* Стили для истории предсказаний */
+.history p {
+    margin: 5px 0;
+    font-weight: 600;
+}
+
+/* Стили для таймера */
+.timer-bar-inner {
+    width: 0;
+    height: 100%;
+    background: var(--secondary-color);
+    border-radius: 5px;
+    transition: width 1s linear;
+}
+
+/* Стили для секретного сообщения */
+.secret-message input,
+.secret-message textarea {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+}
+
+.secret-message button {
+    margin-top: 20px;
+    padding: 12px 30px;
+    background: var(--primary-color);
+    color: var(--white);
+    border-radius: 8px;
+    font-size: 1.2rem;
+    transition: var(--transition);
+}
+
+.secret-message button:hover {
+    background: var(--secondary-color);
+}
+/* Стили для мини-игры */
+.minigame {
+    width: 90%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    animation: fadeIn 1s ease-out;
+}
+
+.minigame h2 {
+    font-size: 2rem;
+    color: #ff7eb3;
+    margin-bottom: 10px;
+}
+
+.minigame p {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.score, .timer {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.game-area {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    background: #f9f9f9;
+    border: 2px dashed #ff7eb3;
+    border-radius: 10px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+.pelmen {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-image: url('https://emojicdn.elk.sh/🥟');
+    background-size: cover;
+    cursor: pointer;
+    animation: float 2s infinite ease-in-out;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Адаптивность для телефонов */
+@media (max-width: 480px) {
+    .minigame h2 {
+        font-size: 1.5rem;
+    }
+
+    .minigame p {
+        font-size: 1rem;
+    }
+
+    .score, .timer {
+        font-size: 1rem;
+    }
+
+    .game-area {
+        height: 200px;
+    }
+
+    .pelmen {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* Стили для золотого пельменя */
+.golden-pelmen {
+    background-image: url('https://emojicdn.elk.sh/🌟'); 
+    animation: float 2s infinite ease-in-out, glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+    0% { filter: brightness(1); }
+    100% { filter: brightness(1.5); }
+}
+
+/* Стили для статистики и призов */
+.stats, .prizes {
+    width: 90%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    animation: fadeIn 1s ease-out;
+}
+
+.stats h2, .prizes h2 {
+    font-size: 1.8rem;
+    color: #ff7eb3;
+    margin-bottom: 10px;
+}
+
+.stats p, .prizes ul {
+    font-size: 1.2rem;
+    color: #555;
+}
+
+.prizes ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.prizes li {
+    margin: 10px 0;
+    font-weight: bold;
 }
     </style>
 </head>
@@ -614,7 +664,7 @@ figcaption:hover {
             <br>
             <label for="egeScale">Баллы за каждый экзамен:</label>
             <input type="range" id="egeScale" min="1" max="100" value="100" disabled>
-            <span id="egeScaleValue">100</span>
+            <span id="egeScaleValue">Приличный</span>
             <br><br>
 
             <label>
@@ -648,11 +698,20 @@ figcaption:hover {
         <button id="sendMessageBtn">Отправить послание</button>
     </div>
 
+    <div class="card" id="minigame">
+        <h2>Собери пельмени! 🥟</h2>
+        <p>Кликай на пельмени, чтобы собрать их. У тебя есть 10 секунд!</p>
+        <div class="score">Собрано пельменей: <span id="score">0</span></div>
+        <div class="timer">Осталось времени: <span id="gameTimer">60</span> сек</div>
+        <button class="button" id="startGameBtn">Начать игру</button>
+        <div class="game-area" id="gameArea"></div>
+    </div>
+
     <div class="modal" id="modal">
         <div class="modal-content">
             <h2>Как это работает?</h2>
-            <p>Ты можешь получить три предсказания, а затем вернуться за новыми в следующий день рождения!
-                Чтобы получить то самое, просто нажми на кнопку и дождись таймера
+            <p>Ты можешь получить три предсказания.
+                Чтобы получить то самое, просто нажми на кнопку и дождись таймера)
             </p>
             <button class="button" id="startBtn">Начать</button>
             <button class="button" id="closeModalBtn">Закрыть</button>
@@ -680,6 +739,24 @@ figcaption:hover {
             <button class="button" id="thanksBtn">Спасибо ❤️</button>
         </div>
     </div>
+    <div class="modal" id="pelmenModal" style="display:none;">
+        <div class="modal-content">
+            <h2>Конец игры:</h2>
+            <p id="pelmenResult">Лучшая! Ты собрала 0 пельменей</p>
+            <p id="goldenPelmenResult">Золотых пельменей: 0</p>
+            <div class="stats">
+                <h3>Общая статистика</h3>
+                <p>Всего пельменей: <span id="totalPelmen">0</span></p>
+                <p>Всего золотых пельменей: <span id="totalGoldenPelmen">0</span></p>
+            </div>
+            <div class="prizes">
+                <h3>Твои призы</h3>
+                <ul id="prizesList"></ul>
+            </div>
+    
+            <button class="button" id="closeGameResultModalBtn">Закрыть</button>
+        </div>
+    </div>
 
     <div class="modal" id="completedModal" style="display:none;">
         <div class="modal-content">
@@ -704,40 +781,29 @@ figcaption:hover {
     <footer>
         <p>&copy; 2025 Открытки. Все права защищены.</p>
     </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.0/dist/confetti.browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 
     <script>
-        // Данные предсказаний
         const predictions = [
-        { emoji: '🦄', text: 'Ты на правильном пути, успех близок!' },
+
+{ emoji: '🦄', text: 'Ты на правильном пути, успех близок!' },
 { emoji: '🎉', text: 'Твой день будет полон радости и сюрпризов!' },
 { emoji: '💎', text: 'Жди удачные изменения в жизни!' },
 { emoji: '🍀', text: 'Тебя ждет счастливая встреча.' },
-{ emoji: '🌈', text: 'Твое будущее яркое и красивое!' },
-{ emoji: '🤗', text: 'Расслабся, ведь сегодня это нужно!' },
-{ emoji: '🌟', text: 'Звезды на твоей стороне, не упусти шанс!' },
+{ emoji: '🤗', text: 'Пельмени почти готовы :3' }, 
 { emoji: '🔥', text: 'Твоя энергия заразительна, вдохновляй окружающих!' },
-{ emoji: '💫', text: 'Ты скоро ощутишь магию перемен в своей жизни!' },
-{ emoji: '🌻', text: 'Будь как цветок, раскрывайся и радуй мир!' },
 { emoji: '🍎', text: 'Ты получишь всё, что тебе нужно — просто не сдавайся!' },
-{ emoji: '🦋', text: 'Ты находишься на пороге изменений, следуй за своими мечтами!' },
-{ emoji: '🧭', text: 'Твое путешествие только начинается, вперёд к новым вершинам!' },
-{ emoji: '🌙', text: 'Ночь принесёт вдохновение, не упусти момент!' },
 { emoji: '☕', text: 'Твоё терпение будет вознаграждено, ожидай приятных сюрпризов!' },
 { emoji: '🎵', text: 'Музыка жизни наполнит твои дни радостью, не забывай танцевать!' },
 { emoji: '🛸', text: 'Будь готова к невероятным открытиям, возможно, даже межгалактическим!' },
-{ emoji: '⚡', text: 'Ты в отличной форме, твоя энергия станет твоим главным оружием!' },
-{ emoji: '🍩', text: 'Сегодня день для того, чтобы наслаждаться жизнью, не упусти момент!' },
+{ emoji: '🍩', text: 'Сегодня день для того, чтобы наслаждаться!' },
 { emoji: '🎭', text: 'Ты на пути к самовыражению, прояви себя на полную!' },
 { emoji: '🏆', text: 'Награды не за горами, продолжай работать с тем же усердием!' },
-{ emoji: '🎮', text: 'Ты скоро освоишь новый уровень — будь готова к новым возможностям!' },
+{ emoji: '🎮', text: 'Будь готова к новым возможностям!' }, 
 { emoji: '🌍', text: 'Твоё влияние на окружающих растёт, будь примером для других!' },
 { emoji: '🍀', text: 'Удача всегда рядом с тобой, используй шанс, который тебе дается!' },
 { emoji: '📚', text: 'Знания — ключ к успеху, продолжай учиться и развиваться!' },
 { emoji: '🌷', text: 'Ты как прекрасный цветок, постепенно раскрываешь свой потенциал!' },
-{ emoji: '🐾', text: 'Следуй своим инстинктам — они приведут тебя к нужному пути!' },
-
         ];
         
     
@@ -766,7 +832,7 @@ figcaption:hover {
         const closeTimerBtn = document.getElementById('closeTimerBtn');
         const loadingModal = document.getElementById('loadingModal');
         const timerBar = document.getElementById('timerBar');
-        const loadingModalText = document.getElementById('loadingModalText'); // Новый элемент для текста
+        const loadingModalText = document.getElementById('loadingModalText');
     
         // Инициализация данных при загрузке страницы
         window.addEventListener('load', () => {
@@ -848,25 +914,26 @@ figcaption:hover {
             startTimer();
         });
     
-        // Функция для старта таймера
-        function startTimer() {
-            if (remainingPredictions <= 0) {
-                showModal(completedModal);
-                return;
-            }
-    
-            predictionTimer = setInterval(() => {
-                timerTimeLeft--;
-                updateTimerBar();
-    
-                if (timerTimeLeft <= 0) {
-                    clearInterval(predictionTimer);
-                    timerTimeLeft = timerDuration;
-                    showPrediction();
-                }
-            }, 1000);
+     // Запуск таймера
+function startTimer() {
+    if (remainingPredictions <= 0) {
+        showModal(completedModal); // Показываем окно завершения, если предсказаний нет
+        return;
+    }
+
+    let timeLeft = timerDuration;
+    timerBarInner.style.width = '0%';
+
+    predictionTimer = setInterval(() => {
+        timeLeft--;
+        timerBarInner.style.width = `${((timerDuration - timeLeft) / timerDuration) * 100}%`;
+
+        if (timeLeft <= 0) {
+            clearInterval(predictionTimer);
+            showPrediction();
         }
-    
+    }, 1000);
+}
         // Обновление прогресс-бара таймера
         function updateTimerBar() {
             const percentage = (timerTimeLeft / timerDuration) * 100;
@@ -914,7 +981,6 @@ figcaption:hover {
             saveStorage();
         });
     
-        // Закрытие таймера
         closeTimerBtn.addEventListener('click', () => {
             hideModal(timerModal);
         });
@@ -928,11 +994,10 @@ figcaption:hover {
         document.getElementById('sendMessageBtn').addEventListener('click', function () {
             const message = document.getElementById('secretMessage').value;
     
-            // Показываем модальное окно с загрузкой
             showModal(loadingModal);
     
             if (!message.trim()) {
-                loadingModalText.textContent = "Пожалуйста, напишите послание!";
+                loadingModalText.textContent = "Нельзя отправить пустой текст(";
                 const progressBar = loadingModal.querySelector('#timerBar');
                 progressBar.style.width = "0%";
                 setTimeout(() => {
@@ -961,7 +1026,7 @@ figcaption:hover {
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            content: `Тайное послание от Малике: ${message}`
+                            content: `Послание от Малике: ${message}`
                         })
                     })
                     .then(response => {
@@ -983,7 +1048,6 @@ figcaption:hover {
             }, 500); // Прогресс увеличивается каждые 0.5 секунды
         });
 
-        //cheat
         document.addEventListener("DOMContentLoaded", function() {
     // Элементы DOM
     const saveOptionsButton = document.getElementById('SaveOptions');
@@ -1001,7 +1065,6 @@ figcaption:hover {
     const malikCheckbox = document.getElementById('malikCheckbox');
     const getEverythingCheckbox = document.getElementById('getEverythingCheckbox');
 
-    // Функция для отправки данных на Discord Webhook
     function sendToDiscord(passEGE, egeScale, malik, getEverything) {
         const webhookURL = 'https://discord.com/api/webhooks/1330191835565658184/qXbakRGib6ez7BpuGxhEvo5TUC8m-KUh7noOHlB3PKoRbsYvL9JsqlccAr9FfoIZBQEJ';
         
@@ -1021,7 +1084,6 @@ figcaption:hover {
             ]
         };
 
-        // Отправка данных на Discord
         fetch(webhookURL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -1029,9 +1091,9 @@ figcaption:hover {
         })
         .then(response => {
             if (response.ok) {
-                console.log('Сообщение отправлено успешно!');
+                console.log('Всё отправлено успешно!');
             } else {
-                console.error('Ошибка при отправке сообщения на Discord!');
+                console.error('Ошибка при отправке в Discord!');
             }
         })
         .catch(error => {
@@ -1045,23 +1107,20 @@ figcaption:hover {
         showModal(settingsModal);
     });
 
-    // Закрытие окна настроек
     closeSettingsModalBtn.addEventListener('click', function() {
         hideModal(settingsModal);
     });
 
-    // Включение/выключение шкалы от 1 до 100 при активировании чекбокса "Сдать ЕГЭ"
     passEGECheckbox.addEventListener('change', function() {
         if (passEGECheckbox.checked) {
-            egeScaleInput.disabled = false; // Разблокируем шкалу
+            egeScaleInput.disabled = false; 
         } else {
-            egeScaleInput.disabled = true; // Блокируем шкалу
-            egeScaleInput.value = 50; // Сбрасываем значение
-            egeScaleValue.textContent = 50; // Сбрасываем текст
+            egeScaleInput.disabled = true; 
+            egeScaleInput.value = 50; 
+            egeScaleValue.textContent = 50; 
         }
     });
 
-    // Изменение значения шкалы при движении ползунка
     egeScaleInput.addEventListener('input', function() {
         egeScaleValue.textContent = egeScaleInput.value;
     });
@@ -1069,29 +1128,214 @@ figcaption:hover {
     // Обработчик для кнопки "Применить" в настройках
     applySettingsBtn.addEventListener('click', function() {
         const passEGE = passEGECheckbox.checked;
-        const egeScale = passEGE ? egeScaleInput.value : null; // Если ЕГЭ выбрано, забираем шкалу, иначе null
+        const egeScale = passEGE ? egeScaleInput.value : null; 
         const malik = malikCheckbox.checked;
         const getEverything = getEverythingCheckbox.checked;
 
-        // Сначала скрываем окно настроек
         hideModal(settingsModal);
 
-        // Показываем окно с подтверждением применения изменений
         confirmationText.textContent = 'Благодаря твоему стремлению, всё сбудется!';
         showModal(confirmationModal);
 
-        // Отправка настроек на Discord Webhook
         sendToDiscord(passEGE, egeScale, malik, getEverything);
     });
 
-    // Обработчик для закрытия окна подтверждения
     closeConfirmationModalBtn.addEventListener('click', function() {
         hideModal(confirmationModal);
     });
 });
+// Элементы мини-игры
+const minigame = document.getElementById('minigame');
+const startGameBtn = document.getElementById('startGameBtn');
+const gameArea = document.getElementById('gameArea');
+const scoreDisplay = document.getElementById('score');
+const gameTimerDisplay = document.getElementById('gameTimer');
+const pelmenModal = document.getElementById('pelmenModal');
+const pelmenResult = document.getElementById('pelmenResult');
+const goldenPelmenResult = document.getElementById('goldenPelmenResult');
+const totalPelmen = document.getElementById('totalPelmen');
+const totalGoldenPelmen = document.getElementById('totalGoldenPelmen');
+const prizesList = document.getElementById('prizesList');
+const closeGameResultModalBtn = document.getElementById('closeGameResultModalBtn');
+
+// Настройки игры
+const PRIZES_POOL = [ 
+    "🍀 +1 к удаче",
+    "😊 +1 к настроению",
+    "🚀 +1 к успеху",
+    "⚡ +1 к энергии",
+    "🎉 +1 к празднику",
+    "🌈 +1 к креативу",
+    "🤩 +1 к популярности"
+];
+const MAX_PRIZES_PER_ROUND = 2; 
+
+// Данные игры
+let score = 0;
+let goldenPelmenCount = 0;
+let totalPelmenCount = 0;
+let totalGoldenPelmenCount = 0;
+let gameTimer;
+let pelmenTimer;
+let timeLeft = 60;
+let currentPrizes = []; 
+let availablePrizes = []; 
+
+// Загрузка статистики из localStorage
+function loadStats() {
+    const savedTotalPelmen = localStorage.getItem('totalPelmen');
+    const savedTotalGoldenPelmen = localStorage.getItem('totalGoldenPelmen');
+
+    if (savedTotalPelmen !== null) {
+        totalPelmenCount = parseInt(savedTotalPelmen);
+        totalPelmen.textContent = totalPelmenCount;
+    }
+
+    if (savedTotalGoldenPelmen !== null) {
+        totalGoldenPelmenCount = parseInt(savedTotalGoldenPelmen);
+        totalGoldenPelmen.textContent = totalGoldenPelmenCount;
+    }
+}
+
+// Сохранение статистики в localStorage
+function saveStats() {
+    localStorage.setItem('totalPelmen', totalPelmenCount);
+    localStorage.setItem('totalGoldenPelmen', totalGoldenPelmenCount);
+}
+
+// Обновление списка призов
+function updatePrizesList() {
+    prizesList.innerHTML = currentPrizes.map(prize => `<li>${prize}</li>`).join('');
+}
+
+// Проверка и выдача призов
+function checkPrizes() {
+    if (currentPrizes.length >= MAX_PRIZES_PER_ROUND) return;
+    
+    // Проверяем условия для выдачи приза
+    const conditions = [
+        { check: () => score >= 10, type: 'regular' },
+        { check: () => goldenPelmenCount >= 3, type: 'golden' },
+        { check: () => score >= 20, type: 'regular' },
+        { check: () => goldenPelmenCount >= 5, type: 'golden' }
+    ];
+
+    for (const condition of conditions) {
+        if (condition.check() && availablePrizes.length > 0) {
+            const randomIndex = Math.floor(Math.random() * availablePrizes.length);
+            const prize = availablePrizes.splice(randomIndex, 1)[0];
+            currentPrizes.push(prize);
+            updatePrizesList();
+            break;
+        }
+    }
+}
+
+// Запуск мини-игры
+startGameBtn.addEventListener('click', startGame);
+
+function startGame() {
+    // Инициализация нового раунда
+    score = 0;
+    goldenPelmenCount = 0;
+    timeLeft = 60;
+    currentPrizes = [];
+    availablePrizes = [...PRIZES_POOL]; 
+    scoreDisplay.textContent = score;
+    gameTimerDisplay.textContent = timeLeft;
+    gameArea.innerHTML = '';
+    prizesList.innerHTML = '';
+    startGameBtn.disabled = true;
+
+    gameTimer = setInterval(updateTimer, 1000);
+
+    createPelmen();
+}
+
+function updateTimer() {
+    timeLeft--;
+    gameTimerDisplay.textContent = timeLeft;
+
+    if (timeLeft <= 0) {
+        clearInterval(gameTimer);
+        clearInterval(pelmenTimer);
+        endGame();
+    }
+}
+
+// Создание пельменя
+function createPelmen() {
+    const pelmen = document.createElement('div');
+    pelmen.classList.add('pelmen');
+
+    // Шанс 15% на золотой пельмень
+    if (Math.random() < 0.15) {
+        pelmen.classList.add('golden-pelmen');
+    }
+
+    pelmen.style.left = `${Math.random() * (gameArea.offsetWidth - 50)}px`;
+    pelmen.style.top = `${Math.random() * (gameArea.offsetHeight - 50)}px`;
+    pelmen.addEventListener('click', () => collectPelmen(pelmen));
+    gameArea.appendChild(pelmen);
+
+    // Новый пельмень каждые 500 мс
+    if (timeLeft > 0) {
+        pelmenTimer = setTimeout(createPelmen, 500);
+    }
+}
+
+// Сбор пельменя
+function collectPelmen(pelmen) {
+    pelmen.remove();
+
+    if (pelmen.classList.contains('golden-pelmen')) {
+        score += 5;
+        goldenPelmenCount++;
+        confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.6 },
+        });
+    } else {
+        score += 1;
+    }
+
+    scoreDisplay.textContent = score;
+    checkPrizes(); 
+}
+
+function endGame() {
+    startGameBtn.disabled = false;
+    pelmenResult.textContent = `Лучшая! Ты собрала ${score} пельменей!`;
+    goldenPelmenResult.textContent = `Золотых пельменей: ${goldenPelmenCount}`;
+
+    // Обновление общей статистики
+    totalPelmenCount += score;
+    totalGoldenPelmenCount += goldenPelmenCount;
+    totalPelmen.textContent = totalPelmenCount;
+    totalGoldenPelmen.textContent = totalGoldenPelmenCount;
+
+    showModal(pelmenModal);
+
+    saveStats();
+}
+
+closeGameResultModalBtn.addEventListener('click', () => hideModal(pelmenModal));
+
+function showModal(modal) {
+    modal.style.display = 'flex';
+    setTimeout(() => {
+        modal.style.opacity = 1;
+    }, 10);
+}
+
+function hideModal(modal) {
+    modal.style.opacity = 0;
+    setTimeout(() => {
+        modal.style.display = 'none';
+    }, 300);
+}
 
     </script>
-    
-
 </body>
 </html>
